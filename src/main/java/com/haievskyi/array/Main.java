@@ -5,7 +5,7 @@ package com.haievskyi.array;
  */
 public class Main {
     public static void main(String[] args) {
-        int arraySize = 2;
+        int arraySize = 10;
         char charX = 'X';
         char charY = 'Y';
         char[] charsSequence = generateArray(charX, charY, arraySize);
@@ -36,7 +36,7 @@ public class Main {
      */
     private static void printArrayToConsole(char[] charsSequence) {
         String output = "[";
-        for (int i = 0; i <= charsSequence.length - 1; i++) {
+        for (int i = 0; i < charsSequence.length; i++) {
             output += (i == charsSequence.length - 1) ?
                     charsSequence[i] :
                     charsSequence[i] + ", ";
