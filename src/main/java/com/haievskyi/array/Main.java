@@ -1,5 +1,7 @@
 package com.haievskyi.array;
 
+import java.util.function.BiConsumer;
+
 public class Main {
     private final static char CHAR_X = 'X';
     private final static char CHAR_Y = 'Y';
@@ -33,11 +35,12 @@ public class Main {
         }));
     }
 
-    private static void iterateArray(char[][] array, ArrayHandler handler) {
+    private static void iterateArray(char[][] array,
+            BiConsumer<Integer, Integer> handler) {
 
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array.length; j++) {
-                handler.handle(i, j);
+                handler.accept(i, j);
             }
         }
     }
