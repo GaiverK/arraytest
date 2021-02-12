@@ -1,43 +1,44 @@
 package com.haievskyi.array;
 
 public class Main {
+    private final static char CHAR_X = 'X';
+    private final static char CHAR_Y = 'Y';
+    private final static int ARRAY_SIZE = 10;
 
     public static void main(String[] args) {
-        char charX = 'X';
-        char charY = 'Y';
-        int arraySize = 5;
-        char[][] charsArray = generateArray(charX, charY, arraySize);
+        char[][] charsArray = generateArray(CHAR_X, CHAR_Y, ARRAY_SIZE);
 
         printArrayToConsole(charsArray);
     }
 
     private static char[][] generateArray(char firstChar, char secondChar,
-        int arraySize) {
-        char[][] arrayResult = new char[arraySize][arraySize];
+            int arraySize) {
 
-        for (int i = 0; i < arraySize; i++) {
-            for (int j = 0; j < arraySize; j++) {
-                arrayResult[i][j] = (j % 2 == 0) ? firstChar : secondChar;
-            }
-        }
-        return arrayResult;
+        char[][] array = new char[arraySize][arraySize];
+
+        iterateArray(array, ((i, j) ->
+                array[i][j] = (j % 2 == 0) ? firstChar : secondChar
+        ));
+
+        return array;
     }
 
     private static void printArrayToConsole(char[][] array) {
-        String output = "[";
+
+        iterateArray(array, ((i, j) -> {
+            System.out.print(array[i][j] + " ");
+            if ((j + 1) % ARRAY_SIZE == 0) {
+                System.out.println();
+            }
+        }));
+    }
+
+    private static void iterateArray(char[][] array, ArrayHandler handler) {
 
         for (int i = 0; i < array.length; i++) {
-            output += "[";
             for (int j = 0; j < array.length; j++) {
-                output += (j != array.length - 1)
-                        ? array[i][j] + ", "
-                        : array[i][j] + "]";
-            }
-            if (i != array.length - 1) {
-                output += ", ";
+                handler.handle(i, j);
             }
         }
-        output += "]";
-        System.out.println(output);
     }
 }
